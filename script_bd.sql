@@ -1,0 +1,46 @@
+CREATE DATABASE livraria;
+
+USE livraria;
+
+CREATE TABLE tb_autor(
+id_autor INT PRIMARY KEY,
+nome VARCHAR(100)
+);
+
+CREATE TABLE tb_cliente(
+id_cliente INT PRIMARY KEY,
+nome VARCHAR(100),
+cpf INT
+);
+
+CREATE TABLE tb_fornecedor(
+id_fornecedor INT PRIMARY KEY,
+nome_fornecedor VARCHAR(100),
+qtd INT,
+preco_compra FLOAT
+);
+
+CREATE TABLE tb_livro(
+id_livro INT PRIMARY KEY,
+titulo VARCHAR(45),
+genero VARCHAR(45),
+preco_venda FLOAT,
+fkAutor INT,
+FOREIGN KEY (fkAutor) REFERENCES tb_autor(id_autor),
+fkFornecedor INT ,
+FOREIGN KEY (fkFornecedor) REFERENCES tb_fornecedor(id_fornecedor)
+);
+
+
+
+CREATE TABLE tb_venda(
+id_venda INT PRIMARY KEY,
+dataVenda DATE,
+fk_cliente INT,
+FOREIGN KEY (fk_cliente) REFERENCES tb_cliente(id_cliente),
+fk_livro INT,
+FOREIGN KEY (fk_livro) REFERENCES tb_livro(id_livro)
+);
+
+
+
