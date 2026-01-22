@@ -21,7 +21,19 @@ function cadastrar(nome) {
 }
 
 
+function rankingAutores(){
+    var instrucaoSql = `
+        SELECT autor.nome, livro.titulo, livro.precoCompra, livro.precoVenda 
+            FROM livro
+                JOIN autor ON autor.id = livro.fkAutor
+                ORDER BY precoCompra DESC LIMIT 3;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     listar,
-    cadastrar
+    cadastrar,
+    rankingAutores
 }

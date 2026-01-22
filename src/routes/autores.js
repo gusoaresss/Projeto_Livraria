@@ -11,4 +11,9 @@ router.post("/cadastrar", function (req, res) {
     autoresController.cadastrar(req, res);
 });
 
+
+router.get("/rankingAutores", function(req, res){
+    autoresController.controller.rankingAutores(req, res);
+})
+
 module.exports = router;

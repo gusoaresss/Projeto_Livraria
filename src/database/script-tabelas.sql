@@ -1,8 +1,6 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
 
 CREATE DATABASE livrariaRecuperacao20261;
+
 
 USE livrariaRecuperacao20261;
 
@@ -45,4 +43,38 @@ INSERT INTO autor(nome) VALUES
 
 
 SELECT * FROM autor;
+
+
+/*cada livro tem uma quantidade ou seja, se cadastrei um livro de romance, 
+e coloquei que ele tem 4 no estoque, e depois cadastrei outro livro de romance e coloquei 4, 
+então ele tem 8 no estoque. preciso pegar todos os livros e somar a quantidade deles em cada categoria*/
+
+SELECT genero.nome, SUM(livro.qtdEstoque)
+FROM livro JOIN genero ON genero.id = livro.fkGenero
+GROUP BY genero.nome ;
+
+
+/*top 3 autores mais caros*/
+SELECT autor.nome, livro.titulo, livro.precoCompra, livro.precoVenda 
+FROM livro
+JOIN autor ON autor.id = livro.fkAutor
+ORDER BY precoCompra DESC LIMIT 3;
+
+
+
+/*Genero com maior quantidade de livros + quantidade */
+
+SELECT genero.nome, SUM(livro.qtdEstoque)
+FROM livro JOIN genero ON genero.id = livro.fkGenero
+GROUP BY genero.nome 
+ORDER BY SUM(livro.qtdEstoque) DESC LIMIT 1;
+
+
+
+
+
+
+
+
+ 
  
